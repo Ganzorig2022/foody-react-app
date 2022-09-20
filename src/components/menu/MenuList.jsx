@@ -5,12 +5,15 @@ import Cards from './Cards';
 import FoodAdd from './FoodAdd';
 import { useMenuContext } from '../../provider/Menu';
 import _ from 'lodash';
+import LoadingSpinner from '../../components/Spinner';
 
 const MenuList = () => {
   const { allMenu, setAllMenu } = useMenuContext();
+
   return (
     <div className={styles.mainContainer}>
       {/* SEARCH BAR */}
+      <LoadingSpinner />
       <Box mt={10} className={styles.searchBox} px={5}>
         <Stack direction='row' alignItems='center'>
           <Typography variant='font18Bold700' pl={3}>
@@ -18,7 +21,7 @@ const MenuList = () => {
           </Typography>
           <span className={styles.smallCircle}></span>
           <Typography variant='font18Bold600' color='secondary.grey' pl={3}>
-            32ш
+            {allMenu.length}ш
           </Typography>
         </Stack>
         <div className={styles.searchWrapper}>
