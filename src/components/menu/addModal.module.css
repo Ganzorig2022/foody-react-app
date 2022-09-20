@@ -1,0 +1,38 @@
+.circle {
+  position: relative;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+}
+
+.foodIcon {
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  font-size: 5rem;
+  /* transform: 'translate(-50%, -50%)'; */
+}
+
+.cameraIcon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  font-size: 2rem;
+  border: 3px solid #fff;
+  padding: 10px;
+  background-color: #f5f5f7;
+  border-radius: 50%;
+}
+.inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.removeBtn {
+  background-color: rgba(255, 0, 0, 0.1);
+  color: #ff0000;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
