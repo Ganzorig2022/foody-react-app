@@ -8,13 +8,13 @@ const MenuOrder = () => {
     <div className={styles.wrapper}>
       <Box mt={5} className={styles.listBox}>
         <div style={{ display: 'flex' }}>
+          {/* <Cards />
           <Cards />
           <Cards />
           <Cards />
           <Cards />
           <Cards />
-          <Cards />
-          <Cards />
+          <Cards /> */}
         </div>
       </Box>
     </div>

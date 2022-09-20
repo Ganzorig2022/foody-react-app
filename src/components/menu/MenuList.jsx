@@ -4,11 +4,10 @@ import styles from './menu.module.css';
 import Cards from './Cards';
 import FoodAdd from './FoodAdd';
 import { useMenuContext } from '../../provider/Menu';
+import _ from 'lodash';
 
 const MenuList = () => {
   const { allMenu, setAllMenu } = useMenuContext();
-  console.log(allMenu);
-
   return (
     <div className={styles.mainContainer}>
       {/* SEARCH BAR */}
@@ -34,9 +33,17 @@ const MenuList = () => {
       <Box mt={5} className={styles.listBox} bgcolor='background.grey'>
         <div className={styles.listBox1}>
           <FoodAdd />
-          {allMenu.map((menu, index) => {
-            return <Cards addBtn={true} />;
-          })}
+          {!_.isEmpty(allMenu) &&
+            allMenu.map((menu, index) => {
+              return (
+                <Cards
+                  addBtn={true}
+                  key={index}
+                  menuIndex={index}
+                  menu={menu}
+                />
+              );
+            })}
         </div>
       </Box>
     </div>
