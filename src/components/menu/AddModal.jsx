@@ -28,6 +28,7 @@ import styles from './addModal.module.css';
 import { v4 as uuidv4 } from 'uuid';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LoadingSpinner from '../../components/Spinner';
 
 const boxStyle = {
   position: 'absolute',
@@ -57,6 +58,7 @@ const AddModal = (props) => {
     imgURL: '',
   });
   const [openRecipeModal, setOpenRecipeModal] = useState(false);
+  const [isLoading, setIsLoading] = useState();
 
   //========Image file input handler===============
   const imgUploadHandler = (e) => {
@@ -127,6 +129,7 @@ const AddModal = (props) => {
   };
 
   const imageUploadToFirestore = async () => {
+    setIsLoading(true);
     // Store image in firebase
     try {
       const storage = getStorage(app);
@@ -136,6 +139,7 @@ const AddModal = (props) => {
       const downloadURL = await getDownloadURL(storageRef);
       addedFood.URL = downloadURL;
       setAddedFood({ ...addedFood });
+      setIsLoading(false);
 
       return true;
     } catch (error) {
@@ -148,201 +152,205 @@ const AddModal = (props) => {
       <Modal open={props.onOpen} onClose={props.onCloseHandler}>
         <Box sx={boxStyle}>
           {/* ================Food add section=========== */}
-          <Stack direction='column' justifyContent='center'>
-            {/* HEADER */}
-            <Stack
-              direction='row'
-              alignItems='center'
-              justifyContent='space-between'
-              pb={2}
-              mx={5}
-            >
-              <Box component='span' onClick={props.onCloseHandler}>
-                <CloseRoundedIcon fontSize='small' />
-              </Box>
-              <div>
-                <Typography variant='font24Bold700'>Хоол нэмэх </Typography>
-              </div>
-              <Button variant='contained' onClick={onSubmitHandler}>
-                Хадгалах
-              </Button>
-            </Stack>
-            <Divider />
-            {/*=========== ADD INFOs========== */}
-            <Stack direction='row' mb={10}>
-              <Box
-                className={styles.circle}
-                m={5}
-                sx={
-                  imageData.url === ''
-                    ? { backgroundColor: 'background.grey' }
-                    : { backgroundColor: 'none' }
-                }
+          {isLoading ? (
+            <LoadingSpinner />
+          ) : (
+            <Stack direction='column' justifyContent='center'>
+              {/* HEADER */}
+              <Stack
+                direction='row'
+                alignItems='center'
+                justifyContent='space-between'
+                pb={2}
+                mx={5}
               >
-                <CardMedia
-                  src={imageData.url}
-                  component='img'
-                  sx={{ borderRadius: '50%' }}
-                />
-                {imageData.url === '' && (
-                  <RestaurantRoundedIcon
-                    className={styles.foodIcon}
-                    fontSize='1'
-                    sx={{ color: '#a0a2a8' }}
-                  />
-                )}
-
-                <label
-                  sx={{
-                    border: `1px solid red`,
-                    display: `inline-block`,
-                    padding: `6px 12px`,
-                    cursor: `pointer`,
-                  }}
+                <Box component='span' onClick={props.onCloseHandler}>
+                  <CloseRoundedIcon fontSize='small' />
+                </Box>
+                <div>
+                  <Typography variant='font24Bold700'>Хоол нэмэх </Typography>
+                </div>
+                <Button variant='contained' onClick={onSubmitHandler}>
+                  Хадгалах
+                </Button>
+              </Stack>
+              <Divider />
+              {/*=========== ADD INFOs========== */}
+              <Stack direction='row' mb={10}>
+                <Box
+                  className={styles.circle}
+                  m={5}
+                  sx={
+                    imageData.url === ''
+                      ? { backgroundColor: 'background.grey' }
+                      : { backgroundColor: 'none' }
+                  }
                 >
-                  <Input
-                    sx={{ display: 'none' }}
-                    type='file'
-                    onChange={imgUploadHandler}
+                  <CardMedia
+                    src={imageData.url}
+                    component='img'
+                    sx={{ borderRadius: '50%' }}
                   />
-                  <CameraAltOutlinedIcon
-                    className={styles.cameraIcon}
-                    sx={{ color: 'secondary.grey' }}
-                  />
-                </label>
-              </Box>
-              <Box className={styles.inputs} mx={10}>
-                <Stack direction='column'>
-                  <Typography
-                    variant='font16Bold600'
-                    color='secondary.black'
-                    mt={5}
-                    mb={2}
+                  {imageData.url === '' && (
+                    <RestaurantRoundedIcon
+                      className={styles.foodIcon}
+                      fontSize='1'
+                      sx={{ color: '#a0a2a8' }}
+                    />
+                  )}
+
+                  <label
+                    sx={{
+                      border: `1px solid red`,
+                      display: `inline-block`,
+                      padding: `6px 12px`,
+                      cursor: `pointer`,
+                    }}
                   >
-                    Хоолны нэр
-                  </Typography>
-                  <TextField
-                    placeholder='Энд бичнэ үү'
-                    name='name'
-                    onChange={inputHandler}
-                  />
-                  <Typography
-                    variant='font16Bold600'
-                    color='secondary.black'
-                    mt={5}
-                    mb={2}
-                  >
-                    Дэлгэрэнгүй
-                  </Typography>
-                  <TextField
-                    variant='outlined'
-                    placeholder='Энд бичнэ үү'
-                    name='desription'
-                    onChange={inputHandler}
-                  />
-                </Stack>
-                <Stack direction='row'>
-                  <Stack mr={5} sx={{ minWidth: 200 }}>
+                    <Input
+                      sx={{ display: 'none' }}
+                      type='file'
+                      onChange={imgUploadHandler}
+                    />
+                    <CameraAltOutlinedIcon
+                      className={styles.cameraIcon}
+                      sx={{ color: 'secondary.grey' }}
+                    />
+                  </label>
+                </Box>
+                <Box className={styles.inputs} mx={10}>
+                  <Stack direction='column'>
                     <Typography
                       variant='font16Bold600'
                       color='secondary.black'
                       mt={5}
                       mb={2}
                     >
-                      Хоолны үнэ
+                      Хоолны нэр
                     </Typography>
                     <TextField
-                      type='number'
-                      placeholder='₮ Энд бичнэ үү'
-                      name='price'
+                      placeholder='Энд бичнэ үү'
+                      name='name'
+                      onChange={inputHandler}
+                    />
+                    <Typography
+                      variant='font16Bold600'
+                      color='secondary.black'
+                      mt={5}
+                      mb={2}
+                    >
+                      Дэлгэрэнгүй
+                    </Typography>
+                    <TextField
+                      variant='outlined'
+                      placeholder='Энд бичнэ үү'
+                      name='desription'
                       onChange={inputHandler}
                     />
                   </Stack>
-                  <Stack>
-                    <Typography
-                      variant='font16Bold600'
-                      color='secondary.black'
-                      mt={5}
-                      mb={2}
-                    >
-                      Төрөл
-                    </Typography>
-                    <FormControl sx={{ minWidth: 200 }}>
-                      <InputLabel id='demo-simple-select-label'>
-                        Төрөл
-                      </InputLabel>
-                      <Select
-                        value={addedFood.category}
-                        name='category'
-                        onChange={inputHandler}
-                      >
-                        <MenuItem value={'Цагаан хоол'}>Цагаан хоол</MenuItem>
-                        <MenuItem value={'Цавуулаггүй хоол'}>
-                          Цавуулаггүй хоол
-                        </MenuItem>
-                        <MenuItem value={'Хөнгөн хоол'}>Хөнгөн хоол</MenuItem>
-                        <MenuItem value={'Халуун ногоотой хоол'}>
-                          Халуун ногоотой хоол
-                        </MenuItem>
-                        <MenuItem value={'Хүнд хоол'}>Хүнд хоол</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Stack>
-                </Stack>
-              </Box>
-            </Stack>
-            <Divider />
-            {/*=========== Recipe add section ===========*/}
-            <Stack direction='column' mb={10}>
-              {/* header */}
-              <Stack direction='row' justifyContent='space-between' m={5}>
-                <Typography variant='font20Bold700'>Орц, найрлага</Typography>
-                <Stack
-                  direction='row'
-                  sx={{ backgroundColor: 'background.grey' }}
-                  py={2}
-                  px={4}
-                  onClick={RecipeModalHandler}
-                >
-                  <AddRoundedIcon />
-                  <Typography>Орц нэмэх</Typography>
-                </Stack>
-              </Stack>
-              {/* recipe input wrapper */}
-              <Stack
-                mx={5}
-                direction='row'
-                flexWrap='wrap'
-                justifyContent='space-between'
-              >
-                {/* recipe input items */}
-                {addedFood.recipes.map((recipe, recipeIndex) => {
-                  return (
-                    <Stack direction='column' key={recipeIndex}>
+                  <Stack direction='row'>
+                    <Stack mr={5} sx={{ minWidth: 200 }}>
                       <Typography
                         variant='font16Bold600'
                         color='secondary.black'
                         mt={5}
                         mb={2}
                       >
-                        {recipe.name}
+                        Хоолны үнэ
                       </Typography>
-                      <Stack direction='row'>
-                        <TextField
-                          placeholder={recipe.amountType}
-                          sx={{ width: 290 }}
-                        />
-                        <Button onClick={() => deleteRecipes(recipeIndex)}>
-                          <RemoveRoundedIcon className={styles.removeBtn} />
-                        </Button>
-                      </Stack>
+                      <TextField
+                        type='number'
+                        placeholder='₮ Энд бичнэ үү'
+                        name='price'
+                        onChange={inputHandler}
+                      />
                     </Stack>
-                  );
-                })}
+                    <Stack>
+                      <Typography
+                        variant='font16Bold600'
+                        color='secondary.black'
+                        mt={5}
+                        mb={2}
+                      >
+                        Төрөл
+                      </Typography>
+                      <FormControl sx={{ minWidth: 200 }}>
+                        <InputLabel id='demo-simple-select-label'>
+                          Төрөл
+                        </InputLabel>
+                        <Select
+                          value={addedFood.category}
+                          name='category'
+                          onChange={inputHandler}
+                        >
+                          <MenuItem value={'Цагаан хоол'}>Цагаан хоол</MenuItem>
+                          <MenuItem value={'Цавуулаггүй хоол'}>
+                            Цавуулаггүй хоол
+                          </MenuItem>
+                          <MenuItem value={'Хөнгөн хоол'}>Хөнгөн хоол</MenuItem>
+                          <MenuItem value={'Халуун ногоотой хоол'}>
+                            Халуун ногоотой хоол
+                          </MenuItem>
+                          <MenuItem value={'Хүнд хоол'}>Хүнд хоол</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Stack>
+                  </Stack>
+                </Box>
               </Stack>
+              <Divider />
+              {/*=========== Recipe add section ===========*/}
+              <Stack direction='column' mb={10}>
+                {/* header */}
+                <Stack direction='row' justifyContent='space-between' m={5}>
+                  <Typography variant='font20Bold700'>Орц, найрлага</Typography>
+                  <Stack
+                    direction='row'
+                    sx={{ backgroundColor: 'background.grey' }}
+                    py={2}
+                    px={4}
+                    onClick={RecipeModalHandler}
+                  >
+                    <AddRoundedIcon />
+                    <Typography>Орц нэмэх</Typography>
+                  </Stack>
+                </Stack>
+                {/* recipe input wrapper */}
+                <Stack
+                  mx={5}
+                  direction='row'
+                  flexWrap='wrap'
+                  justifyContent='space-between'
+                >
+                  {/* recipe input items */}
+                  {addedFood.recipes.map((recipe, recipeIndex) => {
+                    return (
+                      <Stack direction='column' key={recipeIndex}>
+                        <Typography
+                          variant='font16Bold600'
+                          color='secondary.black'
+                          mt={5}
+                          mb={2}
+                        >
+                          {recipe.name}
+                        </Typography>
+                        <Stack direction='row'>
+                          <TextField
+                            placeholder={recipe.amountType}
+                            sx={{ width: 290 }}
+                          />
+                          <Button onClick={() => deleteRecipes(recipeIndex)}>
+                            <RemoveRoundedIcon className={styles.removeBtn} />
+                          </Button>
+                        </Stack>
+                      </Stack>
+                    );
+                  })}
+                </Stack>
+              </Stack>
+              <Divider />
             </Stack>
-            <Divider />
-          </Stack>
+          )}
         </Box>
       </Modal>
       {/*=========== Add Recipe Modal section ===========*/}
