@@ -18,6 +18,7 @@ export const MenuProvider = (props) => {
   });
   const [allMenu, setAllMenu] = useState([]);
   const [isSpinning, setIsSpinning] = useState(false);
+  const [isDownloaded, setIsDownloaded] = useState(false);
   const state = {
     recipesData,
     setRecipesData,
@@ -27,6 +28,8 @@ export const MenuProvider = (props) => {
     setAllMenu,
     isSpinning,
     setIsSpinning,
+    isDownloaded,
+    setIsDownloaded,
   };
   return <MenuContext.Provider value={state}>{children}</MenuContext.Provider>;
 };
