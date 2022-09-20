@@ -17,6 +17,7 @@ import {
 } from '@mui/material';
 import { app } from '../../firebase.config';
 import { getStorage, ref, getDownloadURL, uploadBytes } from 'firebase/storage';
+import { saveMenuDataToFirestore } from '../../hooks/useFirebase';
 import { useMenuContext } from '../../provider/Menu';
 import RecipeModal from './recipe/RecipeModal';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
@@ -47,17 +48,16 @@ const AddModal = (props) => {
     setRecipesData,
     addedFood,
     setAddedFood,
-    allMenu,
-    setAllMenu,
+    isSpinning,
+    setIsSpinning,
+    setIsDownloaded,
   } = useMenuContext();
   const [imageData, setImageData] = useState({
     url: '',
     file: '',
     imageName: '',
-    imgURL: '',
   });
   const [openRecipeModal, setOpenRecipeModal] = useState(false);
-  const { isSpinning, setIsSpinning } = useMenuContext();
 
   //========Image file input handler===============
   const imgUploadHandler = (e) => {
@@ -110,27 +110,31 @@ const AddModal = (props) => {
       recipes: [...filtered],
     });
   };
-  // console.log(addedFood);
 
   //================Check if all inputs are valid before saving=========
   const onSubmitHandler = async () => {
-    props.onCloseHandler(false);
-
     const foodValues = Object.values(addedFood);
-    const isEmpty = foodValues.some((value) => value === '');
-    if (!isEmpty) {
+    const isEmptyInputs = foodValues.some((value) => value === '');
+    const isEmptyRecipe = _.isEmpty(addedFood.recipes);
+    const isEmptyImg = imageData.file === '';
+
+    if (!isEmptyInputs && !isEmptyRecipe && !isEmptyImg) {
+      props.onCloseHandler(false);
+      setIsSpinning(true);
+
       const isUploaded = await imageUploadToFirestore();
-      // const isUploaded = true;
       if (isUploaded) {
-        setAllMenu([...allMenu, addedFood]);
+        setIsSpinning(false);
+        setIsDownloaded(true);
+
         toast.success('Бүх мэдээлэл амжилттай хадгалагдлаа!');
+        saveMenuDataToFirestore(addedFood);
       }
     } else toast.error('Та бүх талбарыг бүрэн гүйцэт бөглөнө үү!');
   };
 
+  //===================Upload image to firebase/STORE=======
   const imageUploadToFirestore = async () => {
-    setIsSpinning(true);
-
     // Store image in firebase
     try {
       const storage = getStorage(app);
@@ -138,9 +142,9 @@ const AddModal = (props) => {
       const uploadTask = await uploadBytes(storageRef, imageData.file);
 
       const downloadURL = await getDownloadURL(storageRef);
+      //add new key to addedFood object.
       addedFood.URL = downloadURL;
       setAddedFood({ ...addedFood });
-      setIsSpinning(false);
 
       return true;
     } catch (error) {
