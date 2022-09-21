@@ -18,6 +18,7 @@ const Theme = createTheme({
       light: '#75ce9f',
       dark: '#01a66f',
       contrastText: '#fff',
+      forgot: '#1976d2',
     },
     secondary: {
       main: '#f44336',
@@ -82,6 +83,9 @@ const Theme = createTheme({
     font14: {
       fontSize: 14,
     },
+    font12: {
+      fontSize: 12,
+    },
     font14Grey: {
       fontSize: 14,
       color: '#a0a2a8',
@@ -89,6 +93,9 @@ const Theme = createTheme({
     font14DarkBLue: {
       fontSize: 14,
       color: '#000723',
+    },
+    bold700: {
+      fontWeight: 700,
     },
     bold600: {
       fontWeight: 600,
@@ -121,3 +128,9 @@ export const CustomTheme = ({ children }) => {
 //  <InputBase
 //    bgcolor='background.grey'
 //  />
+
+// xs, extra-small: 0px
+// sm, small: 600px
+// md, medium: 900px
+// lg, large: 1200px
+// xl, extra-large: 1536px

@@ -10,14 +10,14 @@ import _ from 'lodash';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
-import PackedOrder from './PackedOrder';
+import PackedOrder from './DeliveredOrder';
 import DeliveredOrder from './DeliveredOrder';
-import styles from '../components/accordion.module.css';
-import { OrderSVG } from '../assets/svg/OrderSVG';
-import orders from '../data/order.json';
-import dayNameEng from '../data/dayNameEng.json';
-import dayNameMgl from '../data/dayNameMgl.json';
-import { useOrderContext } from '../provider/Order';
+import styles from '../order/Accordion.module.css';
+import { OrderSVG } from '../../assets/svg/OrderSVG';
+import orders from '../../data/order.json';
+import dayNameEng from '../../data/dayNameEng.json';
+import dayNameMgl from '../../data/dayNameMgl.json';
+import { useOrderContext } from '../../provider/Order';
 
 const AccordionComp = () => {
   const { packedFood, setPackedFood } = useOrderContext();
