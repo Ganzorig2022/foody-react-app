@@ -128,7 +128,7 @@ const AddModal = (props) => {
         setIsDownloaded(true);
 
         toast.success('Бүх мэдээлэл амжилттай хадгалагдлаа!');
-        saveMenuDataToFirestore(addedFood);
+        saveMenuDataToFirestore('menu', addedFood);
       }
     } else toast.error('Та бүх талбарыг бүрэн гүйцэт бөглөнө үү!');
   };
@@ -298,6 +298,22 @@ const AddModal = (props) => {
                       </Select>
                     </FormControl>
                   </Stack>
+                </Stack>
+                <Stack direction='column'>
+                  <Typography
+                    variant='font16Bold600'
+                    color='secondary.black'
+                    mt={5}
+                    mb={2}
+                  >
+                    Порц
+                  </Typography>
+                  <TextField
+                    type='number'
+                    placeholder='Энд бичнэ үү'
+                    name='portion'
+                    onChange={inputHandler}
+                  />
                 </Stack>
               </Box>
             </Stack>

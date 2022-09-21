@@ -14,7 +14,7 @@ const MenuList = () => {
 
   useEffect(() => {
     const getMenuData = async () => {
-      const menuData = await getMenuFromFirestore();
+      const menuData = await getMenuFromFirestore('menu');
       setAllMenu([...menuData]);
       setIsDownloaded(false);
     };
@@ -48,7 +48,7 @@ const MenuList = () => {
         <div className={styles.listBox1}>
           <FoodAdd />
           {!_.isEmpty(allMenu) &&
-            allMenu.map((menu, index) => {
+            _.map(allMenu, (menu, index) => {
               return (
                 <Cards
                   addBtn={true}

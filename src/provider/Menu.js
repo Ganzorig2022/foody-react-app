@@ -14,11 +14,14 @@ export const MenuProvider = (props) => {
     desription: '',
     price: '',
     category: '',
+    portion: '',
     recipes: [],
   });
   const [allMenu, setAllMenu] = useState([]);
   const [isSpinning, setIsSpinning] = useState(false);
   const [isDownloaded, setIsDownloaded] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [openLogin, setOpenLogin] = useState(false);
   const state = {
     recipesData,
     setRecipesData,
@@ -30,6 +33,10 @@ export const MenuProvider = (props) => {
     setIsSpinning,
     isDownloaded,
     setIsDownloaded,
+    isLoggedIn,
+    setIsLoggedIn,
+    openLogin,
+    setOpenLogin,
   };
   return <MenuContext.Provider value={state}>{children}</MenuContext.Provider>;
 };
