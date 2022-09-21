@@ -6,6 +6,7 @@ import {
   Typography,
   Box,
 } from '@mui/material';
+import _ from 'lodash';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
@@ -70,7 +71,7 @@ const AccordionComp = () => {
     <div className={styles.mainContainer}>
       {/* ==============1. ALL ORDER RENDERING============ */}
       <div className={styles.wrapper}>
-        {orderData.map((orders, dayIndex) => {
+        {_.map(orderData, (orders, dayIndex) => {
           return (
             <div className={styles.container} key={dayIndex}>
               <div className={styles.header}>
@@ -128,7 +129,7 @@ const AccordionComp = () => {
                               paddingBottom: '10px',
                             }}
                           >
-                            {order.foods.map((food, key) => {
+                            {_.map(order.food, (food, key) => {
                               return (
                                 <div
                                   key={key}

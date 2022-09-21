@@ -6,6 +6,7 @@ import {
   Typography,
   Box,
 } from '@mui/material';
+import _ from 'lodash';
 import styles from '../components/accordion.module.css';
 import { OrderSVG } from '../assets/svg/OrderSVG';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -58,7 +59,7 @@ const DeliveredOrder = ({ packedData }) => {
 
   return (
     <div className={styles.wrapper} style={{ marginTop: '0' }}>
-      {ordersArr.map((orders, dayIndex) => {
+      {_.map(ordersArr, (orders, dayIndex) => {
         return (
           <div
             className={styles.container}
@@ -76,7 +77,7 @@ const DeliveredOrder = ({ packedData }) => {
                 </Typography>
               </div>
             </div>
-            {orders.map((order, orderIndex) => {
+            {_.map(orders, (order, orderIndex) => {
               const ID = order.id;
               return (
                 <div className={styles.accord} key={orderIndex}>

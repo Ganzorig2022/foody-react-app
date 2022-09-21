@@ -31,7 +31,7 @@ const Cards = (props) => {
               {menu.name}
             </Typography>
             <Typography variant='font14Grey' mt={2}>
-              Порц:1
+              Порц: {menu.portion}
             </Typography>
           </CardContent>
           <CardActions className={styles.cardBtn}>

@@ -1,4 +1,4 @@
-import { Navbar, Order, Menu } from './pages';
+import { Navbar, Order, Menu, Login } from './pages';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -7,9 +7,9 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path='/' element={<Menu />} />
+          <Route path='/' element={<Login />} />
           <Route path='/order' element={<Order />} />
-          <Route path='/graphic' element={<Order />} />
+          {/* <Route path='/graphic' element={<Graphic />} /> */}
           <Route path='/menu' element={<Menu />} />
         </Routes>
       </Router>
