@@ -21,7 +21,7 @@ export const MenuProvider = (props) => {
   const [isSpinning, setIsSpinning] = useState(false);
   const [isDownloaded, setIsDownloaded] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [openLogin, setOpenLogin] = useState(false);
+  const [openLogin, setOpenLogin] = useState(true);
   const state = {
     recipesData,
     setRecipesData,

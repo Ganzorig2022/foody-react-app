@@ -12,10 +12,13 @@ import {
   IconButton,
   OutlinedInput,
 } from '@mui/material';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { OAuth } from '../components/OAuth';
 import { app, db } from '../firebase.config';
 import { useMenuContext } from '../provider/Menu';
+import checkEmail from '../utils/checkEmail';
+import checkPassword from '../utils/checkPassword';
 import LoadingSpinner from '../components/Spinner';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -23,38 +26,53 @@ import ArrowRightOutlinedIcon from '@mui/icons-material/ArrowRightOutlined';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-export const Login = () => {
-  const navigate = useNavigate();
+export const SignUp = () => {
+  const [emailIsValid, setEmailIsValid] = useState();
+  const [passwordIsValid, setPasswordIsValid] = useState();
   const { setIsLoggedIn, openLogin, setOpenLogin, setIsSpinning } =
     useMenuContext();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+
   const emailRef = useRef(null);
   const passRef = useRef(null);
 
-  //===============1. Sign In with firebase/auth when click Login button==============
+  const emailChecker = () => {
+    const result = checkEmail(emailRef.current.value);
+    if (result) setEmailIsValid(true);
+    if (!result) setEmailIsValid(false);
+  };
+  const passwordChecker = () => {
+    const result = checkPassword(passRef.current.value);
+    if (result) setPasswordIsValid(true);
+    if (!result) setPasswordIsValid(false);
+  };
   const onSubmitHandler = async () => {
-    setIsSpinning(true);
-    setOpenLogin(false);
-
     const email = emailRef.current.value;
     const password = passRef.current.value;
+    if (emailIsValid && passwordIsValid) {
+      try {
+        const auth = getAuth(app);
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
 
-    try {
-      const auth = getAuth(app);
+        const user = userCredential.user;
+        await setDoc(doc(db, 'users', user.uid), {
+          email: email,
+          password: password,
+          createdAt: serverTimestamp(),
+        });
 
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      if (userCredential.user) {
         setIsSpinning(false);
         setIsLoggedIn(true);
-        toast.success('Та амжилттай нэвтэрлээ!');
+        toast.success('Та амжилттай бүртгүүллээ!');
         navigate('/menu');
+      } catch (error) {
+        toast.error(error.message);
       }
-    } catch (error) {
-      toast.error('Something went wrong with registration');
     }
   };
 
@@ -72,6 +90,7 @@ export const Login = () => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+
   const style = {
     position: 'absolute',
     top: '50%',
@@ -96,26 +115,35 @@ export const Login = () => {
         <Box sx={style}>
           <Stack p={4}>
             <Typography variant='h4' mb={5} sx={{ textAlign: 'center' }}>
-              НЭВТРЭХ
+              БҮРТГҮҮЛЭХ
             </Typography>
             <Stack spacing={2} direction='column'>
               <Typography variant='font18Bold700' mb={3}>
                 Email
               </Typography>
               <TextField
+                error={emailIsValid && false}
+                onBlur={emailChecker}
                 name='email'
                 type='email'
                 inputRef={emailRef}
                 placeholder='enter email'
-              />
+              />{' '}
+              {emailIsValid === false && (
+                <Typography variant='font12' color='secondary.main'>
+                  Имэйлд @ агуулсан байх ёстой.'
+                </Typography>
+              )}
               <Stack>
                 <Typography variant='font18Bold700' my={3}>
                   Password
                 </Typography>
                 <OutlinedInput
                   name='password'
+                  error={passwordIsValid && false}
                   type={showPassword ? 'text' : 'password'}
                   inputRef={passRef}
+                  onBlur={passwordChecker}
                   placeholder='password'
                   endAdornment={
                     <InputAdornment position='end'>
@@ -130,14 +158,11 @@ export const Login = () => {
                     </InputAdornment>
                   }
                 />
-                <Typography
-                  variant='font14'
-                  my={3}
-                  onClick={() => navigate('/forgot-password')}
-                  color='primary.forgot'
-                >
-                  Forgot Password?
-                </Typography>
+                {passwordIsValid === false && (
+                  <Typography variant='font12' color='secondary.main'>
+                    Хамгийн багадаа 6н оронтой тоо.'
+                  </Typography>
+                )}
               </Stack>
               <Box
                 sx={{
@@ -152,14 +177,14 @@ export const Login = () => {
                   onClick={onSubmitHandler}
                   sx={{ width: '100%', marginTop: '10px' }}
                 >
-                  Нэвтрэх
+                  Бүртгүүлэх
                 </Button>
                 <Divider textAlign='center' sx={{ mt: 5 }}>
                   эсвэл{' '}
                 </Divider>
                 <OAuth />{' '}
-                <Button variant='outlined' onClick={() => navigate('/signup')}>
-                  Бүртгүүлэх <ArrowRightOutlinedIcon />
+                <Button variant='outlined' onClick={() => navigate('/login')}>
+                  Нэвтрэх <ArrowRightOutlinedIcon />
                 </Button>
               </Box>
             </Stack>

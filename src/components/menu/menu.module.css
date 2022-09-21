@@ -29,13 +29,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .avatar {
   position: absolute;
   top: 10%;
-  /* left: 50%;
-  transform: translate(-50%, -50%); */
   z-index: 10;
 }
 

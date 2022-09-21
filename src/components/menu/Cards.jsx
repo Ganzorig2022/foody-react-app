@@ -7,25 +7,68 @@ import {
   Button,
   Typography,
   Avatar,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material';
-import { useMenuContext } from '../../provider/Menu';
 import styles from './menu.module.css';
-import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
-import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import _ from 'lodash';
 
 const Cards = (props) => {
+  const theme = useTheme();
+  const is600px = useMediaQuery(theme.breakpoints.down('sm'));
+  const is600_900px = useMediaQuery(theme.breakpoints.between('sm', 'md'));
+  const is900px = useMediaQuery(theme.breakpoints.down('md'));
   const menu = props.menu;
+
+  const avatarResp = {
+    // avatar: {
+    //   width: (theme) => ({
+    //     xs: 100,
+    //     sm: 100,
+    //     md: 128,
+    //   }),
+    //   height: (theme) => ({
+    //     xs: 100,
+    //     sm: 100,
+    //     md: 128,
+    //   }),
+    // },
+    // box: {
+    //   width: (theme) => ({
+    //     xs: 160,
+    //     sm: 160,
+    //     md: 200,
+    //   }),
+    //   height: (theme) => ({
+    //     xs: 200,
+    //     sm: 270,
+    //     md: 320,
+    //   }),
+    // },
+    // card: {
+    //   width: (theme) => ({
+    //     xs: 160,
+    //     sm: 160,
+    //     md: 190,
+    //   }),
+    //   height: (theme) => ({
+    //     xs: 200,
+    //     sm: 200,
+    //     md: 230,
+    //   }),
+    // },
+  };
   return (
-    <Box className={styles.box} mr={4}>
+    <Box className={styles.box} mr={4} sx={avatarResp.box}>
       <>
         <Avatar
           alt={menu.name}
           src={menu.URL}
           className={styles.avatar}
+          // sx={avatarResp.avatar}
           sx={{ width: 128, height: 128 }}
         />
-        <Card variant='outlined' className={styles.card}>
+        <Card variant='outlined' className={styles.card} sx={avatarResp.card}>
           <CardContent className={styles.cardContent}>
             <Typography variant='font18Bold600' component='div'>
               {menu.name}
@@ -40,11 +83,6 @@ const Cards = (props) => {
               variant='contained'
               sx={{ fontSize: '0.75rem', padding: '0 4px' }}
             >
-              {/* {props.addBtn ? (
-                <AddCircleRoundedIcon className={styles.addBtn} />
-              ) : (
-                <RemoveRoundedIcon className={styles.removeBtn} />
-              )} */}
               Дэлгэрэнгүй
             </Button>
           </CardActions>

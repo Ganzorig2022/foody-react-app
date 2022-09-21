@@ -7,7 +7,7 @@ import {
   Box,
 } from '@mui/material';
 import _ from 'lodash';
-import styles from '../components/accordion.module.css';
+import styles from '../components/order/Accordion.module.css';
 import { OrderSVG } from '../assets/svg/OrderSVG';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';

@@ -1,5 +1,5 @@
 import React from 'react';
-import AccordionComp from '../components/Accordion';
+import AccordionComp from '../components/order/Accordion';
 
 export const Order = () => {
   return (

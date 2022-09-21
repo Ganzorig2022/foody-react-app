@@ -13,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 //============1. Save NEW food data to Firestore database================
 const saveMenuDataToFirestore = async (collectionName, dataObj) => {
   try {
-    const docRef = await addDoc(collection(db, 'menu'), dataObj);
+    const docRef = await addDoc(collection(db, collectionName), dataObj);
     console.log('Document written with ID: ', docRef.id);
   } catch (error) {
     toast.error(error.message);
@@ -21,22 +21,6 @@ const saveMenuDataToFirestore = async (collectionName, dataObj) => {
 };
 
 //============2. Fetch saved food data from Firestore database================
-// const getMenuFromFirestore = async () => {
-//   const menuData = [];
-
-//   try {
-//     const docRef = await collection(db, 'menu');
-//     const queryData = query(docRef);
-//     const querySnap = await getDocs(queryData);
-//     querySnap.forEach((doc) => {
-//       return menuData.push(doc.data());
-//     });
-//   } catch (error) {
-//     toast.error(error.message);
-//   }
-
-//   return menuData;
-// };
 
 const getMenuFromFirestore = async (collectionName) => {
   const menuData = [];

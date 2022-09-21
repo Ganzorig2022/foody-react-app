@@ -7,13 +7,13 @@ import {
   Box,
 } from '@mui/material';
 import _ from 'lodash';
-import styles from '../components/accordion.module.css';
-import { OrderSVG } from '../assets/svg/OrderSVG';
+import styles from '../order/Accordion.module.css';
+import { OrderSVG } from '../../assets/svg/OrderSVG';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
-import dayNameEng from '../data/dayNameEng.json';
-import { useOrderContext } from '../provider/Order';
+import dayNameEng from '../../data/dayNameEng.json';
+import { useOrderContext } from '../../provider/Order';
 
 const DeliveredOrder = ({ packedData }) => {
   const title = ['ХҮРГЭСЭН', '', '', '', '', '', ''];
