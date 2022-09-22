@@ -7,13 +7,13 @@ import {
   Box,
 } from '@mui/material';
 import _ from 'lodash';
-import styles from '../components/order/Accordion.module.css';
-import { OrderSVG } from '../assets/svg/OrderSVG';
+import styles from '../order/Accordion.module.css';
+import { OrderSVG } from '../../assets/svg/OrderSVG';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
-import dayNameEng from '../data/dayNameEng.json';
-import { useOrderContext } from '../provider/Order';
+import dayNameEng from '../../data/dayNameEng.json';
+import { useOrderContext } from '../../provider/Order';
 
 const PackedOrder = ({ packedData }) => {
   const title = ['САВЛАСАН', '', '', '', '', '', ''];
@@ -30,8 +30,10 @@ const PackedOrder = ({ packedData }) => {
   //===========2. Handler function for which select->option has been selected================
   const handleSelect = (event, orderObj, day, dayIndex, orderIndex) => {
     const value = event.target.value;
-    if (value === 'delivered') getOrderFromSelect(orderObj, day);
-    removeOrder(dayIndex, orderIndex, day);
+    if (value === 'delivered') {
+      getOrderFromSelect(orderObj, day);
+      removeOrder(dayIndex, orderIndex, day);
+    }
   };
 
   //==============3. Remove order from selected day's orders=============
@@ -45,9 +47,7 @@ const PackedOrder = ({ packedData }) => {
     );
 
     //3. set updated order for re-rendering
-    // ordersArr[dayIndex] = filtered;
     setPackedFood({ ...packedFood, [day]: [...filtered] });
-    // setOrderData([...orderData]);
   };
 
   //===========4. Function for setting delivered food order================
@@ -119,7 +119,7 @@ const PackedOrder = ({ packedData }) => {
                                 }}
                               >
                                 <div>
-                                  {'-'}
+                                  {'-'}&nbsp;
                                   {food.name}
                                 </div>
                                 <div style={{ color: '#000723' }}>

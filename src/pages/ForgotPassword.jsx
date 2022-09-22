@@ -7,20 +7,26 @@ import {
   Modal,
   TextField,
   Stack,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material';
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 import { app, db } from '../firebase.config';
 import { useMenuContext } from '../provider/Menu';
-import LoadingSpinner from '../components/Spinner';
+import { LoadingSpinner, classes } from '../components';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { checkEmail } from '../utils';
 
 export const ForgotPassword = () => {
   const { setIsLoggedIn, openLogin, setOpenLogin, setIsSpinning } =
     useMenuContext();
+  const [emailIsValid, setEmailIsValid] = useState();
   const navigate = useNavigate();
 
   const emailRef = useRef(null);
+  const theme = useTheme();
+  const is600px = useMediaQuery(theme.breakpoints.down('sm'));
 
   const onSubmitHandler = async () => {
     setIsSpinning(true);
@@ -43,19 +49,11 @@ export const ForgotPassword = () => {
   const ModalCloseHandler = () => {
     setOpenLogin(false);
   };
-
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    boxShadow: 24,
-    p: 4,
-    borderRadius: '8px',
+  const emailChecker = () => {
+    const result = checkEmail(emailRef.current.value);
+    if (result) setEmailIsValid(true);
+    if (!result) setEmailIsValid(false);
   };
-
   return (
     <div>
       <LoadingSpinner />
@@ -65,13 +63,13 @@ export const ForgotPassword = () => {
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'
       >
-        <Box sx={style}>
+        <Box sx={classes.modalContainer}>
           <Stack p={4}>
-            <Typography variant='h4' mb={5} sx={{ textAlign: 'center' }}>
+            <Typography mb={5} sx={classes.modalTypo}>
               НУУЦ ҮГ СЭРГЭЭХ
             </Typography>
             <Stack spacing={2} direction='column'>
-              <Typography variant='font18Bold700' mb={3}>
+              <Typography sx={classes.modalTypo1} mb={3}>
                 Email
               </Typography>
               <TextField
@@ -79,7 +77,14 @@ export const ForgotPassword = () => {
                 type='email'
                 inputRef={emailRef}
                 placeholder='enter email'
-              />
+                onBlur={emailChecker}
+                size={is600px && 'small'}
+              />{' '}
+              {emailIsValid === false && (
+                <Typography variant='font12' color='secondary.main'>
+                  Имэйлд @ агуулсан байх ёстой.'
+                </Typography>
+              )}
             </Stack>
             <Box
               sx={{

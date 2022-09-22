@@ -25,7 +25,6 @@ export const OAuth = () => {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      console.log(user.uid);
       // Check for user
       const docRef = doc(db, 'users', user.uid);
       const docSnap = await getDoc(docRef);
@@ -45,6 +44,7 @@ export const OAuth = () => {
       }
     } catch (error) {
       toast.error(error.message);
+      console.log(error);
     }
   };
 
@@ -55,11 +55,13 @@ export const OAuth = () => {
         flexDirection: 'column',
         justifyContent: 'center',
         m: 5,
+        textAlign: 'center',
+        fontSize: { xs: 14, sm: 16 },
       }}
     >
       Google эрхээр {location.pathname === '/signup' ? 'бүртгүүлэх' : 'нэвтрэх'}
       <Button onClick={onGoogleClick}>
-        <GoogleIcon />
+        <GoogleIcon sx={{ xs: 12 }} size='small' />
       </Button>
     </Box>
   );

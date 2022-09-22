@@ -21,7 +21,7 @@ import AssignmentOutlinedIcon from '@mui/icons-material/AssignmentOutlined';
 import { Logo } from '../assets/svg/Logo';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
-const DrawerComp = () => {
+export const DrawerComp = () => {
   const auth = getAuth(app);
   const [openDrawer, setOpenDrawer] = useState(true);
   const navigate = useNavigate();
@@ -102,5 +102,3 @@ const DrawerComp = () => {
     </React.Fragment>
   );
 };
-
-export default DrawerComp;

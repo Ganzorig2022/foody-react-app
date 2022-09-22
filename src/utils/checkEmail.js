@@ -1,4 +1,4 @@
-const checkEmail = (email) => {
+export const checkEmail = (email) => {
   let emailRegex = /^[^ ]+@[^ ]+.[a-z]{2,3}$/;
 
   if (email === '') return false;
@@ -10,5 +10,3 @@ const checkEmail = (email) => {
     }
   }
 };
-
-export default checkEmail;

@@ -11,15 +11,15 @@ import {
   InputAdornment,
   IconButton,
   OutlinedInput,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
-import { OAuth } from '../components/OAuth';
+import { OAuth, classes, LoadingSpinner } from '../components';
 import { app, db } from '../firebase.config';
 import { useMenuContext } from '../provider/Menu';
-import checkEmail from '../utils/checkEmail';
-import checkPassword from '../utils/checkPassword';
-import LoadingSpinner from '../components/Spinner';
+import { checkEmail, checkPassword } from '../utils';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ArrowRightOutlinedIcon from '@mui/icons-material/ArrowRightOutlined';
@@ -36,6 +36,8 @@ export const SignUp = () => {
 
   const emailRef = useRef(null);
   const passRef = useRef(null);
+  const theme = useTheme();
+  const is600px = useMediaQuery(theme.breakpoints.down('sm'));
 
   const emailChecker = () => {
     const result = checkEmail(emailRef.current.value);
@@ -47,6 +49,8 @@ export const SignUp = () => {
     if (result) setPasswordIsValid(true);
     if (!result) setPasswordIsValid(false);
   };
+
+  //=============1. Create user on firebase/auth==============
   const onSubmitHandler = async () => {
     const email = emailRef.current.value;
     const password = passRef.current.value;
@@ -91,18 +95,6 @@ export const SignUp = () => {
     event.preventDefault();
   };
 
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    boxShadow: 24,
-    p: 4,
-    borderRadius: '8px',
-  };
-
   return (
     <div>
       <LoadingSpinner />
@@ -112,13 +104,13 @@ export const SignUp = () => {
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'
       >
-        <Box sx={style}>
+        <Box sx={classes.modalContainer}>
           <Stack p={4}>
-            <Typography variant='h4' mb={5} sx={{ textAlign: 'center' }}>
+            <Typography mb={5} sx={classes.modalTypo}>
               БҮРТГҮҮЛЭХ
             </Typography>
             <Stack spacing={2} direction='column'>
-              <Typography variant='font18Bold700' mb={3}>
+              <Typography sx={classes.modalTypo1} mb={3}>
                 Email
               </Typography>
               <TextField
@@ -128,6 +120,7 @@ export const SignUp = () => {
                 type='email'
                 inputRef={emailRef}
                 placeholder='enter email'
+                size={is600px && 'small'}
               />{' '}
               {emailIsValid === false && (
                 <Typography variant='font12' color='secondary.main'>
@@ -143,6 +136,7 @@ export const SignUp = () => {
                   error={passwordIsValid && false}
                   type={showPassword ? 'text' : 'password'}
                   inputRef={passRef}
+                  size={is600px && 'small'}
                   onBlur={passwordChecker}
                   placeholder='password'
                   endAdornment={
