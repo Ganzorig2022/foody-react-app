@@ -3,7 +3,7 @@ import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useMenuContext } from '../provider/Menu';
 
-const LoadingSpinner = () => {
+export const LoadingSpinner = () => {
   const { isSpinning } = useMenuContext();
   return (
     <div>
@@ -16,4 +16,3 @@ const LoadingSpinner = () => {
     </div>
   );
 };
-export default LoadingSpinner;

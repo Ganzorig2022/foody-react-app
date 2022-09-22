@@ -1,4 +1,4 @@
-import { useState, Fragment } from 'react';
+import { Fragment } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -10,15 +10,14 @@ import {
   Button,
 } from '@mui/material';
 import { useMenuContext } from '../provider/Menu';
-import DrawerComp from '../components/Drawer';
+import { DrawerComp } from '../components';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
 import styles from '../pages/navbar.module.css';
 
 export const Navbar = () => {
-  const { openLogin, setOpenLogin, isLoggedIn, setIsLoggedIn } =
-    useMenuContext();
+  const { setOpenLogin, isLoggedIn } = useMenuContext();
   const theme = useTheme();
   const is600px = useMediaQuery(theme.breakpoints.down('sm'));
   const is600_900px = useMediaQuery(theme.breakpoints.between('sm', 'md'));
@@ -41,7 +40,6 @@ export const Navbar = () => {
     marginLeft: '10px',
   };
 
-  // console.log(is900px);
   return (
     <Fragment>
       <AppBar sx={appStyle}>
@@ -69,7 +67,6 @@ export const Navbar = () => {
                   ml={2}
                   alt='Ganzo'
                   src='https://randomuser.me/api/portraits/women/79.jpg'
-                  // sx={is600px && { width: 30, height: 30 }}
                   style={{ marginLeft: '10px' }}
                 />
               </Box>
@@ -95,36 +92,3 @@ export const Navbar = () => {
     </Fragment>
   );
 };
-
-// import * as React from 'react';
-// import AppBar from '@mui/material/AppBar';
-// import Box from '@mui/material/Box';
-// import Toolbar from '@mui/material/Toolbar';
-// import Typography from '@mui/material/Typography';
-// import Button from '@mui/material/Button';
-// import IconButton from '@mui/material/IconButton';
-// import MenuIcon from '@mui/icons-material/Menu';
-
-// export const Navbar = () => {
-//   return (
-//     <Box sx={{ flexGrow: 1 }}>
-//       <AppBar position='static'>
-//         <Toolbar>
-//           <IconButton
-//             size='large'
-//             edge='start'
-//             color='inherit'
-//             aria-label='menu'
-//             sx={{ mr: 2 }}
-//           >
-//             <MenuIcon />
-//           </IconButton>
-//           <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-//             News
-//           </Typography>
-//           <Button color='inherit'>Login</Button>
-//         </Toolbar>
-//       </AppBar>
-//     </Box>
-//   );
-// };

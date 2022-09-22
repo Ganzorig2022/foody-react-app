@@ -14,6 +14,14 @@ function App() {
           <Route path='/forgot-password' element={<ForgotPassword />} />
           {/* <Route path='/graphic' element={<Graphic />} /> */}
           <Route path='/menu' element={<Menu />} />
+          <Route
+            path='*'
+            element={
+              <h1 style={{ marginTop: '100px', textAlign: 'center' }}>
+                404 PAGE NOT FOUND
+              </h1>
+            }
+          />
         </Routes>
       </Router>
     </>

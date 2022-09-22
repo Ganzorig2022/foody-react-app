@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import _ from 'lodash';
 import { Box, Typography, InputBase, Stack } from '@mui/material';
 import styles from './menu.module.css';
 import Cards from './Cards';
 import FoodAdd from './FoodAdd';
 import { useMenuContext } from '../../provider/Menu';
-import LoadingSpinner from '../../components/Spinner';
+import { LoadingSpinner } from '../../components/Spinner';
 import { getMenuFromFirestore } from '../../hooks/useFirebase';
 
 const MenuList = () => {

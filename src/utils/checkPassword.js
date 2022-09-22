@@ -1,4 +1,4 @@
-const checkPassword = (password) => {
+export const checkPassword = (password) => {
   if (password === '') return false;
   if (password !== '') {
     if (password.trim().length >= 6) {
@@ -8,5 +8,3 @@ const checkPassword = (password) => {
     }
   }
 };
-
-export default checkPassword;

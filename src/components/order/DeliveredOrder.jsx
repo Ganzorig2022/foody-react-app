@@ -29,8 +29,10 @@ const DeliveredOrder = ({ packedData }) => {
   //===========2. Handler function for which select->option has been selected================
   const handleSelect = (event, orderObj, day, dayIndex, orderIndex) => {
     const value = event.target.value;
-    if (value === 'delivered') getOrderFromSelect(orderObj, day);
-    removeOrder(dayIndex, orderIndex, day);
+    if (value === 'delivered') {
+      getOrderFromSelect(orderObj, day);
+      removeOrder(dayIndex, orderIndex, day);
+    }
   };
 
   //==============3. Remove order from selected day's orders=============
@@ -44,9 +46,7 @@ const DeliveredOrder = ({ packedData }) => {
     );
 
     //3. set updated order for re-rendering
-    // ordersArr[dayIndex] = filtered;
     setDeliveredFood({ ...deliveredFood, [day]: [...filtered] });
-    // setOrderData([...orderData]);
   };
 
   //===========4. Function for setting delivered food order================
@@ -128,7 +128,7 @@ const DeliveredOrder = ({ packedData }) => {
                                 }}
                               >
                                 <div>
-                                  {'-'}
+                                  {'-'} &nbsp;
                                   {food.name}
                                 </div>
                                 <div style={{ color: '#000723' }}>
@@ -194,9 +194,6 @@ const DeliveredOrder = ({ packedData }) => {
                           <option className={styles.option} value={''}>
                             Захиалга
                           </option>
-                          {/* <option className={styles.option} value={'packed'}>
-                            Савласан
-                          </option> */}
                           <option className={styles.option} value={'delivered'}>
                             Хүргэсэн
                           </option>

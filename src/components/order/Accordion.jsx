@@ -7,17 +7,17 @@ import {
   Box,
 } from '@mui/material';
 import _ from 'lodash';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
-import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
-import PackedOrder from './DeliveredOrder';
+import { useOrderContext } from '../../provider/Order';
+import PackedOrder from './PackedOrder';
 import DeliveredOrder from './DeliveredOrder';
 import styles from '../order/Accordion.module.css';
 import { OrderSVG } from '../../assets/svg/OrderSVG';
 import orders from '../../data/order.json';
 import dayNameEng from '../../data/dayNameEng.json';
 import dayNameMgl from '../../data/dayNameMgl.json';
-import { useOrderContext } from '../../provider/Order';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
 
 const AccordionComp = () => {
   const { packedFood, setPackedFood } = useOrderContext();
@@ -40,8 +40,10 @@ const AccordionComp = () => {
   //===========2. Handler function for which select->option has been selected================
   const handleSelect = (event, orderObj, day, dayIndex, orderIndex) => {
     const value = event.target.value;
-    if (value === 'packed') getOrderFromSelect(orderObj, day);
-    removeOrder(dayIndex, orderIndex);
+    if (value === 'packed') {
+      getOrderFromSelect(orderObj, day);
+      removeOrder(dayIndex, orderIndex);
+    }
   };
 
   //==============3. Remove order from selected day's orders=============
@@ -66,7 +68,6 @@ const AccordionComp = () => {
       [day]: [...packedFood[day], orderObj],
     });
   };
-
   return (
     <div className={styles.mainContainer}>
       {/* ==============1. ALL ORDER RENDERING============ */}
@@ -129,17 +130,17 @@ const AccordionComp = () => {
                               paddingBottom: '10px',
                             }}
                           >
-                            {_.map(order.food, (food, key) => {
+                            {_.map(order.foods, (food, foodIndex) => {
                               return (
                                 <div
-                                  key={key}
+                                  key={foodIndex}
                                   style={{
                                     display: 'flex',
                                     justifyContent: 'space-between',
                                   }}
                                 >
                                   <div>
-                                    {'-'}
+                                    {'-'} &nbsp;
                                     {food.name}
                                   </div>
                                   <div style={{ color: '#000723' }}>
