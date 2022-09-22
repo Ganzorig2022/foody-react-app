@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -14,4 +15,11 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+// const auth = getAuth(app);
+
+// if (location.hostname === 'localhost') {
+//   db.useEmulator('localhost', 8080);
+//   auth.useEmulator('http://localhost:8080/', { disableWarnings: true });
+// }
+// const emulator = connectFirestoreEmulator(db, 'localhost', 8080);
 export { db, app };

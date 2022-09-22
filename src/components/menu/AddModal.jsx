@@ -87,7 +87,7 @@ const AddModal = (props) => {
     setOpenRecipeModal(true);
   };
 
-  //======Set recipes to=============
+  //========Set recipes to=============
   const RecipeModalClose = () => {
     setOpenRecipeModal(false);
     const length = Object.values(recipesData).length;
@@ -142,7 +142,7 @@ const AddModal = (props) => {
       const uploadTask = await uploadBytes(storageRef, imageData.file);
 
       const downloadURL = await getDownloadURL(storageRef);
-      //add new key to addedFood object.
+      //add new key (URL) to addedFood object.
       addedFood.URL = downloadURL;
       setAddedFood({ ...addedFood });
 
@@ -157,7 +157,6 @@ const AddModal = (props) => {
       <Modal open={props.onOpen} onClose={props.onCloseHandler}>
         <Box sx={boxStyle}>
           {/* ================Food add section=========== */}
-
           <Stack direction='column' justifyContent='center'>
             {/* HEADER */}
             <Stack

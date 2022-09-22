@@ -17,7 +17,7 @@ import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
 import styles from '../pages/navbar.module.css';
 
 export const Navbar = () => {
-  const { setOpenLogin, isLoggedIn } = useMenuContext();
+  const { openLogin, setOpenLogin, isLoggedIn } = useMenuContext();
   const theme = useTheme();
   const is600px = useMediaQuery(theme.breakpoints.down('sm'));
   const is600_900px = useMediaQuery(theme.breakpoints.between('sm', 'md'));

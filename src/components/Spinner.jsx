@@ -7,11 +7,9 @@ export const LoadingSpinner = () => {
   const { isSpinning } = useMenuContext();
   return (
     <div>
-      <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={isSpinning}
-      >
-        <CircularProgress color='inherit' />
+      <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={isSpinning}>
+        <p>Loading...</p>
+        <CircularProgress color="inherit" />
       </Backdrop>
     </div>
   );

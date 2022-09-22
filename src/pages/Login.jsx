@@ -27,8 +27,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 export const Login = () => {
   const navigate = useNavigate();
-  const { setIsLoggedIn, openLogin, setOpenLogin, setIsSpinning } =
-    useMenuContext();
+  const { setIsLoggedIn, openLogin, setOpenLogin, setIsSpinning } = useMenuContext();
   const [showPassword, setShowPassword] = useState(false);
   const [emailIsValid, setEmailIsValid] = useState();
   const [passwordIsValid, setPasswordIsValid] = useState();
@@ -48,11 +47,7 @@ export const Login = () => {
       try {
         const auth = getAuth(app);
 
-        const userCredential = await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
         if (userCredential.user) {
           setIsSpinning(false);
           setIsLoggedIn(true);
@@ -65,6 +60,7 @@ export const Login = () => {
     }
   };
 
+  //===================Helper functions====================================
   const emailChecker = () => {
     const result = checkEmail(emailRef.current.value);
     if (result) setEmailIsValid(true);
@@ -96,29 +92,29 @@ export const Login = () => {
       <Modal
         open={openLogin}
         onClose={loginModalCloseHandler}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
       >
         <Box sx={classes.modalContainer}>
           <Stack p={4}>
             <Typography mb={5} sx={classes.modalTypo}>
               НЭВТРЭХ
             </Typography>
-            <Stack spacing={2} direction='column'>
+            <Stack spacing={2} direction="column">
               <Typography sx={classes.modalTypo1} mb={3}>
                 Email
               </Typography>
               <TextField
-                name='email'
-                type='email'
+                name="email"
+                type="email"
                 inputRef={emailRef}
-                placeholder='enter email'
+                placeholder="enter email"
                 size={is600px && 'small'}
                 sx={classes.modalTxtField}
                 onBlur={emailChecker}
               />
               {emailIsValid === false && (
-                <Typography variant='font12' color='secondary.main'>
+                <Typography variant="font12" color="secondary.main">
                   Имэйлд @ агуулсан байх ёстой.'
                 </Typography>
               )}
@@ -127,19 +123,19 @@ export const Login = () => {
                   Password
                 </Typography>
                 <OutlinedInput
-                  name='password'
+                  name="password"
                   type={showPassword ? 'text' : 'password'}
                   size={is600px && 'small'}
                   inputRef={passRef}
-                  placeholder='password'
+                  placeholder="password"
                   onBlur={passwordChecker}
                   endAdornment={
-                    <InputAdornment position='end'>
+                    <InputAdornment position="end">
                       <IconButton
-                        aria-label='toggle password visibility'
+                        aria-label="toggle password visibility"
                         onClick={handleClickShowPassword}
                         onMouseDown={handleMouseDownPassword}
-                        edge='end'
+                        edge="end"
                       >
                         {showPassword ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
@@ -147,16 +143,11 @@ export const Login = () => {
                   }
                 />
                 {passwordIsValid === false && (
-                  <Typography variant='font12' color='secondary.main'>
+                  <Typography variant="font12" color="secondary.main">
                     Хамгийн багадаа 6н оронтой тоо.'
                   </Typography>
                 )}
-                <Typography
-                  variant='font14'
-                  my={3}
-                  onClick={() => navigate('/forgot-password')}
-                  color='primary.forgot'
-                >
+                <Typography variant="font14" my={3} onClick={() => navigate('/forgot-password')} color="primary.forgot">
                   Forgot Password?
                 </Typography>
               </Stack>
@@ -168,18 +159,14 @@ export const Login = () => {
                   alignItems: 'center',
                 }}
               >
-                <Button
-                  variant='contained'
-                  onClick={onSubmitHandler}
-                  sx={{ width: '100%', marginTop: '10px' }}
-                >
+                <Button variant="contained" onClick={onSubmitHandler} sx={{ width: '100%', marginTop: '10px' }}>
                   Нэвтрэх
                 </Button>
-                <Divider textAlign='center' sx={{ mt: 5 }}>
+                <Divider textAlign="center" sx={{ mt: 5 }}>
                   эсвэл{' '}
                 </Divider>
                 <OAuth />{' '}
-                <Button variant='outlined' onClick={() => navigate('/signup')}>
+                <Button variant="outlined" onClick={() => navigate('/signup')}>
                   Бүртгүүлэх <ArrowRightOutlinedIcon />
                 </Button>
               </Box>

@@ -43,3 +43,32 @@ gh-pages->/root->SAVE hiine.
 4. firebase init
 5. npm run build
 6. firebase deploy
+
+=================================================================
+=======================FIREBASE CLOUD FUNCTIONS===================================
+npm install firebase-functions@latest firebase-admin@latest --save
+npm install -g firebase-tools (check if installed => firebase tools --version)
+
+firebase init
+
+(_) Firestore: Configure security rules and indexes files for Firestore
+(_) Functions: Configure a Cloud Functions directory and its files
+
+> JavaScript coнгоно.
+> Бусдыг нь ENTER, ENTER...
+
+https://www.oracle.com/java/technologies/downloads/#jdk18-windows
+
+firebase emulators:start
+
+==================================================FIX JAVA PROBLEM FOR WINDOWS===============================================================
+Click start and type in Environment Variables and click it when it pops up. You can also open the command line by pressing WIN + R and paste in this rundll32.exe sysdm.cpl,EditEnvironmentVariables.
+
+Once the Environment variables window pops up, click on path and click on edit.
+
+Check to see if the Java directory is there, if not, click on New and find the Java\jdk-<version>\bin folder and add it. Ok out of all the menu.
+
+Restart powershell and run 'java -version' again.
+
+=================================================================
+View Emulator UI at http://localhost:4000
