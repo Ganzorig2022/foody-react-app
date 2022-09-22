@@ -40,6 +40,7 @@ const AccordionComp = () => {
   //===========2. Handler function for which select->option has been selected================
   const handleSelect = (event, orderObj, day, dayIndex, orderIndex) => {
     const value = event.target.value;
+    //1. if select "савласан", then set it to packedFood[].
     if (value === 'packed') {
       getOrderFromSelect(orderObj, day);
       removeOrder(dayIndex, orderIndex);

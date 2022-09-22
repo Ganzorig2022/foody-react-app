@@ -1,12 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { app, db } from '../firebase.config';
-import {
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  sendSignInLinkToEmail,
-} from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, signInWithPopup, sendSignInLinkToEmail } from 'firebase/auth';
 import { useMenuContext } from '../provider/Menu';
 import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore';
 import { Box, Button } from '@mui/material';
@@ -17,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 export const OAuth = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { isLoggedIn, setIsLoggedIn } = useMenuContext();
+  const { isLoggedIn, setIsLoggedIn, setOpenLogin } = useMenuContext();
 
   const onGoogleClick = async () => {
     try {
@@ -31,15 +26,20 @@ export const OAuth = () => {
 
       // If user, doesn't exist, create user
       if (!docSnap.exists()) {
-        await setDoc(doc(db, 'users', user.uid), {
+        const result = await setDoc(doc(db, 'users', user.uid), {
           name: user.displayName,
           email: user.email,
           timestamp: serverTimestamp(),
         });
+        setIsLoggedIn(true);
+        navigate('/menu');
+        setOpenLogin(false);
         toast.success('Та амжилттай бүртгүүллээ!');
       }
       if (docSnap.exists()) {
         setIsLoggedIn(true);
+        setOpenLogin(false);
+        navigate('/menu');
         toast.success('Та амжилттай нэвтэрлээ!');
       }
     } catch (error) {
@@ -61,7 +61,7 @@ export const OAuth = () => {
     >
       Google эрхээр {location.pathname === '/signup' ? 'бүртгүүлэх' : 'нэвтрэх'}
       <Button onClick={onGoogleClick}>
-        <GoogleIcon sx={{ xs: 12 }} size='small' />
+        <GoogleIcon sx={{ xs: 12 }} size="small" />
       </Button>
     </Box>
   );

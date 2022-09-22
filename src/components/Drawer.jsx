@@ -1,13 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Drawer,
-  List,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  IconButton,
-  Stack,
-} from '@mui/material';
+import { Drawer, List, ListItemButton, ListItemIcon, ListItemText, IconButton, Stack } from '@mui/material';
 import { useMenuContext } from '../provider/Menu';
 import { useNavigate } from 'react-router-dom';
 import { getAuth } from 'firebase/auth';
@@ -22,22 +14,22 @@ import { Logo } from '../assets/svg/Logo';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
 export const DrawerComp = () => {
-  const auth = getAuth(app);
   const [openDrawer, setOpenDrawer] = useState(true);
   const navigate = useNavigate();
-  const { isLoggedIn, setIsLoggedIn } = useMenuContext();
+  const { setIsLoggedIn } = useMenuContext();
 
   const onClose = () => {
     setOpenDrawer(!openDrawer);
   };
 
+  //==========Navigate to pages when click the button=============
   const onNavigate = (path) => {
-    if (path === 'order') navigate('/order');
-    if (path === 'graphic') navigate('/graphic');
-    if (path === 'menu') navigate('/menu');
+    navigate(`${path}`);
   };
 
+  //===============Sign out when click the button=================
   const onLogOut = () => {
+    const auth = getAuth(app);
     auth.signOut();
     setIsLoggedIn(false);
     toast.error('Та системээс гарлаа.');
@@ -45,7 +37,7 @@ export const DrawerComp = () => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <Drawer open={openDrawer} onClose={onClose}>
         <List sx={{ background: '#000723', height: '100vh' }}>
           <Stack>
@@ -54,32 +46,19 @@ export const DrawerComp = () => {
                 <Logo />
               </div>
               <ListItemButton>
-                <ListItemIcon
-                  sx={{ color: '#fff' }}
-                  onClick={() => onNavigate('order')}
-                >
+                <ListItemIcon sx={{ color: '#fff' }} onClick={() => onNavigate('order')}>
                   <AssignmentOutlinedIcon />
-                  <ListItemText sx={{ marginLeft: '10px' }}>
-                    Захиалга
-                  </ListItemText>
+                  <ListItemText sx={{ marginLeft: '10px' }}>Захиалга</ListItemText>
                 </ListItemIcon>
               </ListItemButton>
               <ListItemButton>
-                <ListItemIcon
-                  sx={{ color: '#fff' }}
-                  onClick={() => onNavigate('graphic')}
-                >
+                <ListItemIcon sx={{ color: '#fff' }} onClick={() => onNavigate('graphic')}>
                   <SignalCellularAltOutlinedIcon />
-                  <ListItemText sx={{ marginLeft: '10px' }}>
-                    График
-                  </ListItemText>
+                  <ListItemText sx={{ marginLeft: '10px' }}>График</ListItemText>
                 </ListItemIcon>
               </ListItemButton>
               <ListItemButton>
-                <ListItemIcon
-                  sx={{ color: '#fff' }}
-                  onClick={() => onNavigate('menu')}
-                >
+                <ListItemIcon sx={{ color: '#fff' }} onClick={() => onNavigate('menu')}>
                   <RestaurantMenuOutlinedIcon />
                   <ListItemText sx={{ marginLeft: '10px' }}>Меню</ListItemText>
                 </ListItemIcon>
@@ -99,6 +78,6 @@ export const DrawerComp = () => {
       <IconButton onClick={onClose} sx={{ color: '#000', marginLeft: 'auto' }}>
         <MenuIcon />
       </IconButton>
-    </React.Fragment>
+    </>
   );
 };
