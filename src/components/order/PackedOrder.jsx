@@ -1,24 +1,17 @@
 import { useState } from 'react';
-import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Typography,
-  Box,
-} from '@mui/material';
+import { Accordion, AccordionSummary, AccordionDetails, Typography, Box } from '@mui/material';
 import _ from 'lodash';
+import { useOrderContext } from '../../provider/Order';
 import styles from '../order/Accordion.module.css';
 import { OrderSVG } from '../../assets/svg/OrderSVG';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
 import dayNameEng from '../../data/dayNameEng.json';
-import { useOrderContext } from '../../provider/Order';
 
 const PackedOrder = ({ packedData }) => {
   const title = ['САВЛАСАН', '', '', '', '', '', ''];
-  const { packedFood, setPackedFood, deliveredFood, setDeliveredFood } =
-    useOrderContext();
+  const { packedFood, setPackedFood, deliveredFood, setDeliveredFood } = useOrderContext();
   const ordersArr = Object.values(packedFood);
   const [expanded, setExpanded] = useState(false);
 
@@ -42,9 +35,7 @@ const PackedOrder = ({ packedData }) => {
     const currentDayOrders = ordersArr[dayIndex];
 
     //2. remove selected order from day's orders
-    const filtered = currentDayOrders.filter(
-      (order, orderIdx) => orderIdx !== orderIndex
-    );
+    const filtered = currentDayOrders.filter((order, orderIdx) => orderIdx !== orderIndex);
 
     //3. set updated order for re-rendering
     setPackedFood({ ...packedFood, [day]: [...filtered] });
@@ -62,16 +53,12 @@ const PackedOrder = ({ packedData }) => {
     <div className={styles.wrapper} style={{ marginTop: '0' }}>
       {_.map(ordersArr, (orders, dayIndex) => {
         return (
-          <div
-            className={styles.container}
-            style={{ background: '#FFF9F1' }}
-            key={dayIndex}
-          >
+          <div className={styles.container} style={{ background: '#FFF9F1' }} key={dayIndex}>
             <div className={styles.header}>
-              <Typography variant='bold600'>{title[dayIndex]}</Typography>
+              <Typography variant="bold600">{title[dayIndex]}</Typography>
               <div className={styles.orderNum}>
                 <OrderSVG />
-                <Typography color='secondary.grey'>{orders.length}</Typography>
+                <Typography color="secondary.grey">{orders.length}</Typography>
               </div>
             </div>
             {_.map(orders, (order, orderIndex) => {
@@ -88,14 +75,14 @@ const PackedOrder = ({ packedData }) => {
                     }}
                   >
                     <AccordionSummary
-                      id='panel1-header'
-                      aria-controls='panel1-content'
+                      id="panel1-header"
+                      aria-controls="panel1-content"
                       expandIcon={<ExpandMoreIcon />}
                       sx={{ borderBottom: '1px solid #DFE0EB' }}
                     >
-                      <Typography color='secondary.darkBlue' variant='bold600'>
+                      <Typography color="secondary.darkBlue" variant="bold600">
                         {order.orderID}
-                        <Typography ml={2.5} variant='font16Bold500Grey'>
+                        <Typography ml={2.5} variant="font16Bold500Grey">
                           {order.day}
                         </Typography>
                       </Typography>
@@ -130,11 +117,11 @@ const PackedOrder = ({ packedData }) => {
                             );
                           })}
                         </div>
-                        <Typography variant='font14DarkBLue' mr={2.5}>
+                        <Typography variant="font14DarkBLue" mr={2.5}>
                           {
                             <LocationOnOutlinedIcon
                               mr={1.25}
-                              color='primary'
+                              color="primary"
                               sx={{
                                 width: '1rem',
                               }}
@@ -143,11 +130,11 @@ const PackedOrder = ({ packedData }) => {
                           {order.address}
                         </Typography>{' '}
                         <br />
-                        <Typography variant='font14DarkBLue' mr={2.5}>
+                        <Typography variant="font14DarkBLue" mr={2.5}>
                           {
                             <CallOutlinedIcon
                               mr={2.5}
-                              color='primary'
+                              color="primary"
                               sx={{
                                 width: '1rem',
                               }}
@@ -161,15 +148,7 @@ const PackedOrder = ({ packedData }) => {
                         <select
                           id={ID}
                           className={styles.select}
-                          onChange={(event) =>
-                            handleSelect(
-                              event,
-                              order,
-                              dayNameEng[dayIndex],
-                              dayIndex,
-                              orderIndex
-                            )
-                          }
+                          onChange={(event) => handleSelect(event, order, dayNameEng[dayIndex], dayIndex, orderIndex)}
                         >
                           <option className={styles.option} value={''}>
                             Захиалга

@@ -1,11 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Typography,
-  Box,
-} from '@mui/material';
+import { Accordion, AccordionSummary, AccordionDetails, Typography, Box } from '@mui/material';
 import _ from 'lodash';
 import { useOrderContext } from '../../provider/Order';
 import PackedOrder from './PackedOrder';
@@ -53,9 +47,7 @@ const AccordionComp = () => {
     const currentDayOrders = orderData[dayIndex];
 
     //2. remove selected order from day's orders
-    const filtered = currentDayOrders.filter(
-      (order, orderIdx) => orderIdx !== orderIndex
-    );
+    const filtered = currentDayOrders.filter((order, orderIdx) => orderIdx !== orderIndex);
 
     //3. set updated order for re-rendering
     orderData[dayIndex] = filtered;
@@ -69,6 +61,7 @@ const AccordionComp = () => {
       [day]: [...packedFood[day], orderObj],
     });
   };
+
   return (
     <div className={styles.mainContainer}>
       {/* ==============1. ALL ORDER RENDERING============ */}
@@ -77,14 +70,10 @@ const AccordionComp = () => {
           return (
             <div className={styles.container} key={dayIndex}>
               <div className={styles.header}>
-                <Typography variant='bold600'>
-                  {dayNameMgl[dayIndex]}
-                </Typography>
+                <Typography variant="bold600">{dayNameMgl[dayIndex]}</Typography>
                 <div className={styles.orderNum}>
-                  <OrderSVG color='secondary.grey' />
-                  <Typography color='secondary.grey'>
-                    {orders.length}
-                  </Typography>
+                  <OrderSVG color="secondary.grey" />
+                  <Typography color="secondary.grey">{orders.length}</Typography>
                 </div>
               </div>
               {orders.map((order, orderIndex) => {
@@ -101,15 +90,12 @@ const AccordionComp = () => {
                       }}
                     >
                       <AccordionSummary
-                        id='panel1-header'
-                        aria-controls='panel1-content'
+                        id="panel1-header"
+                        aria-controls="panel1-content"
                         expandIcon={<ExpandMoreIcon />}
                         sx={{ borderBottom: '1px solid #DFE0EB' }}
                       >
-                        <Typography
-                          variant='bold600'
-                          color='secondary.darkBlue'
-                        >
+                        <Typography variant="bold600" color="secondary.darkBlue">
                           {order.orderID}
                           <small
                             style={{
@@ -152,14 +138,10 @@ const AccordionComp = () => {
                               );
                             })}
                           </div>
-                          <Typography
-                            color='secondary.darkBlue'
-                            variant='font14'
-                            mt={2.5}
-                          >
+                          <Typography color="secondary.darkBlue" variant="font14" mt={2.5}>
                             {
                               <LocationOnOutlinedIcon
-                                color='primary'
+                                color="primary"
                                 my={2.5}
                                 sx={{
                                   width: '1rem',
@@ -169,14 +151,10 @@ const AccordionComp = () => {
                             {order.address}
                           </Typography>
                           <br />
-                          <Typography
-                            color='secondary.darkBlue'
-                            variant='font14'
-                            mt={2.5}
-                          >
+                          <Typography color="secondary.darkBlue" variant="font14" mt={2.5}>
                             {
                               <CallOutlinedIcon
-                                color='primary'
+                                color="primary"
                                 mr={2.5}
                                 sx={{
                                   width: '1rem',
@@ -191,15 +169,7 @@ const AccordionComp = () => {
                           <select
                             id={ID}
                             className={styles.select}
-                            onChange={(event) =>
-                              handleSelect(
-                                event,
-                                order,
-                                dayNameEng[dayIndex],
-                                dayIndex,
-                                orderIndex
-                              )
-                            }
+                            onChange={(event) => handleSelect(event, order, dayNameEng[dayIndex], dayIndex, orderIndex)}
                           >
                             <option className={styles.option} value={''}>
                               Захиалга
@@ -207,10 +177,7 @@ const AccordionComp = () => {
                             <option className={styles.option} value={'packed'}>
                               Савласан
                             </option>
-                            <option
-                              className={styles.option}
-                              value={'delivered'}
-                            >
+                            <option className={styles.option} value={'delivered'}>
                               Хүргэсэн
                             </option>
                             <option className={styles.option} value={'error'}>

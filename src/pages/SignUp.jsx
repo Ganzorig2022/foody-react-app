@@ -29,8 +29,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 export const SignUp = () => {
   const [emailIsValid, setEmailIsValid] = useState();
   const [passwordIsValid, setPasswordIsValid] = useState();
-  const { setIsLoggedIn, openLogin, setOpenLogin, setIsSpinning } =
-    useMenuContext();
+  const { setIsLoggedIn, openLogin, setOpenLogin, setIsSpinning } = useMenuContext();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -57,11 +56,7 @@ export const SignUp = () => {
     if (emailIsValid && passwordIsValid) {
       try {
         const auth = getAuth(app);
-        const userCredential = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
         const user = userCredential.user;
         await setDoc(doc(db, 'users', user.uid), {
@@ -101,51 +96,51 @@ export const SignUp = () => {
       <Modal
         open={openLogin}
         onClose={loginModalCloseHandler}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
       >
         <Box sx={classes.modalContainer}>
           <Stack p={4}>
             <Typography mb={5} sx={classes.modalTypo}>
               БҮРТГҮҮЛЭХ
             </Typography>
-            <Stack spacing={2} direction='column'>
+            <Stack spacing={2} direction="column">
               <Typography sx={classes.modalTypo1} mb={3}>
                 Email
               </Typography>
               <TextField
                 error={emailIsValid && false}
                 onBlur={emailChecker}
-                name='email'
-                type='email'
+                name="email"
+                type="email"
                 inputRef={emailRef}
-                placeholder='enter email'
+                placeholder="enter email"
                 size={is600px && 'small'}
               />{' '}
               {emailIsValid === false && (
-                <Typography variant='font12' color='secondary.main'>
+                <Typography variant="font12" color="secondary.main">
                   Имэйлд @ агуулсан байх ёстой.'
                 </Typography>
               )}
               <Stack>
-                <Typography variant='font18Bold700' my={3}>
+                <Typography variant="font18Bold700" my={3}>
                   Password
                 </Typography>
                 <OutlinedInput
-                  name='password'
+                  name="password"
                   error={passwordIsValid && false}
                   type={showPassword ? 'text' : 'password'}
                   inputRef={passRef}
                   size={is600px && 'small'}
                   onBlur={passwordChecker}
-                  placeholder='password'
+                  placeholder="password"
                   endAdornment={
-                    <InputAdornment position='end'>
+                    <InputAdornment position="end">
                       <IconButton
-                        aria-label='toggle password visibility'
+                        aria-label="toggle password visibility"
                         onClick={handleClickShowPassword}
                         onMouseDown={handleMouseDownPassword}
-                        edge='end'
+                        edge="end"
                       >
                         {showPassword ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
@@ -153,7 +148,7 @@ export const SignUp = () => {
                   }
                 />
                 {passwordIsValid === false && (
-                  <Typography variant='font12' color='secondary.main'>
+                  <Typography variant="font12" color="secondary.main">
                     Хамгийн багадаа 6н оронтой тоо.'
                   </Typography>
                 )}
@@ -166,18 +161,14 @@ export const SignUp = () => {
                   alignItems: 'center',
                 }}
               >
-                <Button
-                  variant='contained'
-                  onClick={onSubmitHandler}
-                  sx={{ width: '100%', marginTop: '10px' }}
-                >
+                <Button variant="contained" onClick={onSubmitHandler} sx={{ width: '100%', marginTop: '10px' }}>
                   Бүртгүүлэх
                 </Button>
-                <Divider textAlign='center' sx={{ mt: 5 }}>
+                <Divider textAlign="center" sx={{ mt: 5 }}>
                   эсвэл{' '}
                 </Divider>
                 <OAuth />{' '}
-                <Button variant='outlined' onClick={() => navigate('/login')}>
+                <Button variant="outlined" onClick={() => navigate('/login')}>
                   Нэвтрэх <ArrowRightOutlinedIcon />
                 </Button>
               </Box>
