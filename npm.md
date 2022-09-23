@@ -2,7 +2,7 @@ npm i react-router-dom
 npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
 npm install @mui/material @emotion/react @emotion/styled
 npm i react-toastify
-
+npm i chart.js react-chartjs-2
 =====================================================================================
 
 //==============GITHUB DEPLOY==============
@@ -22,7 +22,7 @@ npm i react-toastify
 },
 "scripts": {
 "start": "react-scripts start",
-"build": "react-scripts build", (eniig nemne!!!)
+"build": "react-scripts build", 
 "predeploy": "npm run build", (eniig nemne!!!)
 "test": "react-scripts test",
 "eject": "react-scripts eject",
@@ -43,6 +43,7 @@ gh-pages->/root->SAVE hiine.
 4. firebase init
 5. npm run build
 6. firebase deploy
+    "deploy": "npm run build && firebase deploy",
 
 =================================================================
 =======================FIREBASE CLOUD FUNCTIONS===================================
@@ -72,3 +73,25 @@ Restart powershell and run 'java -version' again.
 
 =================================================================
 View Emulator UI at http://localhost:4000
+
+
+================================================================
+import * as React from 'react';
+import { Routes, Route, useParams } from 'react-router-dom';
+
+function ProfilePage() {
+  // Get the userId param from the URL.
+  let { userId } = useParams();
+  // ...
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="users">
+        <Route path=":userId" element={<ProfilePage />} />
+        <Route path="me" element={...} />
+      </Route>
+    </Routes>
+  );
+}
