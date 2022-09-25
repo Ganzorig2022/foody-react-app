@@ -1,6 +1,8 @@
 import { Navbar, Order, Menu, Login, SignUp, ForgotPassword, Graphic } from './pages';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const style = {

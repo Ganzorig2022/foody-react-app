@@ -1,15 +1,25 @@
 import React, { useState } from 'react';
-import { Drawer, List, ListItemButton, ListItemIcon, ListItemText, IconButton, Stack } from '@mui/material';
+import {
+  Drawer,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  IconButton,
+  Stack,
+  styled,
+  Divider,
+} from '@mui/material';
 import { useMenuContext } from '../provider/Menu';
 import { useNavigate } from 'react-router-dom';
 import { getAuth } from 'firebase/auth';
 import { app, db } from '../firebase.config';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import MenuIcon from '@mui/icons-material/Menu';
 import SignalCellularAltOutlinedIcon from '@mui/icons-material/SignalCellularAltOutlined';
 import RestaurantMenuOutlinedIcon from '@mui/icons-material/RestaurantMenuOutlined';
 import AssignmentOutlinedIcon from '@mui/icons-material/AssignmentOutlined';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Logo } from '../assets/svg/Logo';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
@@ -35,14 +45,26 @@ export const DrawerComp = () => {
     toast.error('Та системээс гарлаа.');
     navigate('/menu');
   };
-
+  const DrawerHeader = styled('div')(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    justifyContent: 'flex-end',
+    backgroundColor: '#000723',
+  }));
   return (
     <>
-      <Drawer open={openDrawer} onClose={onClose}>
-        <List sx={{ background: '#000723', height: '100vh' }}>
+      <Drawer open={openDrawer} onClose={onClose} hideBackdrop={true}>
+        <DrawerHeader>
+          <IconButton onClick={onClose}>
+            <ChevronLeftIcon sx={{ color: 'secondary.contrastText' }} />
+          </IconButton>
+        </DrawerHeader>
+        {/* <Divider /> */}
+        <List sx={{ background: '#000723', height: '100vh', width: '100%' }}>
           <Stack>
             <Stack>
-              <div style={{ padding: '40px' }}>
+              <div style={{ padding: '10px 40px' }}>
                 <Logo />
               </div>
               <ListItemButton>

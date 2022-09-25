@@ -6,7 +6,6 @@ import { app, db } from '../firebase.config';
 import { useMenuContext } from '../provider/Menu';
 import { LoadingSpinner, classes } from '../components';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { checkEmail } from '../utils';
 
 export const ForgotPassword = () => {
