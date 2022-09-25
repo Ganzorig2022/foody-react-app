@@ -195,9 +195,9 @@ const AccordionComp = () => {
         })}
       </div>
       {/* ==============2. ALL PACKED ORDER RENDERING============ */}
-      <PackedOrder packedData={packedFood} />
+      <PackedOrder />
       {/* ==============3. ALL DELIVERED ORDER RENDERING============ */}
-      <DeliveredOrder packedData={packedFood} />
+      <DeliveredOrder />
     </div>
   );
 };

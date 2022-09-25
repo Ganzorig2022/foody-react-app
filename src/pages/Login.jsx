@@ -20,7 +20,6 @@ import { app } from '../firebase.config';
 import { useMenuContext } from '../provider/Menu';
 import { checkEmail, checkPassword } from '../utils';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import ArrowRightOutlinedIcon from '@mui/icons-material/ArrowRightOutlined';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
