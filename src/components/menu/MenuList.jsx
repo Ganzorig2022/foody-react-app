@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import _ from 'lodash';
 import { Box, Typography, InputBase, Stack } from '@mui/material';
 import styles from './menu.module.css';
@@ -12,7 +11,6 @@ import { getDataFromFirestore } from '../../hooks/useFirebase';
 const MenuList = () => {
   const { allMenu, setAllMenu, isDownloaded, setIsDownloaded } = useMenuContext();
   const [isLoading, setIsLoading] = useState(true);
-  const params = useParams();
 
   useEffect(() => {
     const getMenuData = async () => {
@@ -22,7 +20,7 @@ const MenuList = () => {
       setIsLoading(false);
     };
     getMenuData();
-  }, [isDownloaded]);
+  }, [isDownloaded, setIsDownloaded, setAllMenu]);
 
   if (isLoading) return <h2 style={{ marginTop: '200px', textAlign: 'center' }}>Түр хүлээнэ үү...</h2>;
 

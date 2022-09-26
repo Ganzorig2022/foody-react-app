@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { app, db } from '../firebase.config';
-import { getAuth, GoogleAuthProvider, signInWithPopup, sendSignInLinkToEmail } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useMenuContext } from '../provider/Menu';
 import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore';
 import { Box, Button } from '@mui/material';
@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 export const OAuth = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { isLoggedIn, setIsLoggedIn, setOpenLogin } = useMenuContext();
+  const { setIsLoggedIn, setOpenLogin } = useMenuContext();
 
   const onGoogleClick = async () => {
     try {
@@ -26,7 +26,7 @@ export const OAuth = () => {
 
       // If user, doesn't exist, create user
       if (!docSnap.exists()) {
-        const result = await setDoc(doc(db, 'users', user.uid), {
+        await setDoc(doc(db, 'users', user.uid), {
           name: user.displayName,
           email: user.email,
           timestamp: serverTimestamp(),

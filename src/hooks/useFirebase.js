@@ -1,5 +1,5 @@
-import { db, app } from '../firebase.config';
-import { collection, getDocs, doc, query, updateDoc, addDoc } from 'firebase/firestore';
+import { db } from '../firebase.config';
+import { collection, getDocs, query, addDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 
 //============1. Save NEW food data to Firestore database================

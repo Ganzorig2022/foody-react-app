@@ -1,5 +1,3 @@
-import { styled } from '@mui/material';
-
 export const classes = {
   foodAddContainer: (theme) => ({
     position: 'absolute',

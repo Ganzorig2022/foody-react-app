@@ -1,19 +1,9 @@
 import React, { useState } from 'react';
-import {
-  Drawer,
-  List,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  IconButton,
-  Stack,
-  styled,
-  Divider,
-} from '@mui/material';
+import { Drawer, List, ListItemButton, ListItemIcon, ListItemText, IconButton, Stack, styled } from '@mui/material';
 import { useMenuContext } from '../provider/Menu';
 import { useNavigate } from 'react-router-dom';
 import { getAuth } from 'firebase/auth';
-import { app, db } from '../firebase.config';
+import { app } from '../firebase.config';
 import { toast } from 'react-toastify';
 import MenuIcon from '@mui/icons-material/Menu';
 import SignalCellularAltOutlinedIcon from '@mui/icons-material/SignalCellularAltOutlined';

@@ -23,7 +23,7 @@ export const useAuthStatus = () => {
     return () => {
       isMounted.current = false;
     };
-  }, [isMounted]);
+  }, [isMounted, setIsLoggedIn]);
 
   return { checkingStatus };
 };

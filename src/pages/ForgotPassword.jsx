@@ -2,14 +2,14 @@ import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, Typography, Modal, TextField, Stack, useMediaQuery, useTheme } from '@mui/material';
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
-import { app, db } from '../firebase.config';
+import { app } from '../firebase.config';
 import { useMenuContext } from '../provider/Menu';
 import { LoadingSpinner, classes } from '../components';
 import { toast } from 'react-toastify';
 import { checkEmail } from '../utils';
 
 export const ForgotPassword = () => {
-  const { setIsLoggedIn, openLogin, setOpenLogin, setIsSpinning } = useMenuContext();
+  const { openLogin, setOpenLogin, setIsSpinning } = useMenuContext();
   const [emailIsValid, setEmailIsValid] = useState();
   const navigate = useNavigate();
 

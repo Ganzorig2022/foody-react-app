@@ -1,12 +1,9 @@
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { useMenuContext } from '../provider/Menu';
-import { useAuthStatus } from '../hooks/useAuthStatus';
-import { LoadingSpinner } from '../components/Spinner';
 
 const PrivateRoute = () => {
-  const { isLoggedIn, openLogin, setOpenLogin, isSpinning, setIsSpinning } = useMenuContext();
-  // const { checkingStatus } = useAuthStatus();
+  const { isLoggedIn, setOpenLogin } = useMenuContext();
 
   if (!isLoggedIn) setOpenLogin(true);
   //if user is logged in then go to other pages

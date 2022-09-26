@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Tabs, Tab, Box, Typography, makeStyles } from '@mui/material';
+import { Tabs, Tab, Box, Typography } from '@mui/material';
 
 import styles from './menu.module.css';
 
@@ -24,29 +24,17 @@ const MenuTabs = () => {
       <Tabs
         value={value}
         onChange={handleChange}
-        textColor='main'
-        aria-label='secondary tabs example'
+        textColor="main"
+        aria-label="secondary tabs example"
         className={styles.tabContainer}
       >
-        <Tab
-          value='one'
-          label='2 сарын 11'
-          sx={{ textTransform: 'lowercase', fontSize: '18px' }}
-        />
-        <Tab
-          value='two'
-          label='2 сарын 18'
-          sx={{ textTransform: 'lowercase', fontSize: '18px' }}
-        />
-        <Tab
-          value='three'
-          label='2 сарын 25'
-          sx={{ textTransform: 'lowercase', fontSize: '18px' }}
-        />
+        <Tab value="one" label="2 сарын 11" sx={{ textTransform: 'lowercase', fontSize: '18px' }} />
+        <Tab value="two" label="2 сарын 18" sx={{ textTransform: 'lowercase', fontSize: '18px' }} />
+        <Tab value="three" label="2 сарын 25" sx={{ textTransform: 'lowercase', fontSize: '18px' }} />
       </Tabs>
       <Typography
-        color='primary.main'
-        variant='font18'
+        color="primary.main"
+        variant="font18"
         sx={{
           marginRight: (theme) => theme.spacing(5),
         }}

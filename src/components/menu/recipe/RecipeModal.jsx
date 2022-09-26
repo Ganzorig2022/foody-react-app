@@ -1,5 +1,4 @@
-import React, { useState, useRef } from 'react';
-import _ from 'lodash';
+import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -52,66 +51,39 @@ const RecipeModal = (props) => {
     <div>
       <Modal open={props.onOpen} onClose={props.onCloseHandler}>
         <Box sx={boxStyle}>
-          <Stack direction='column' justifyContent='center'>
+          <Stack direction="column" justifyContent="center">
             {/* HEADER */}
-            <Stack
-              direction='row'
-              alignItems='center'
-              justifyContent='space-between'
-              pb={2}
-              mx={5}
-            >
-              <Box component='span' onClick={props.onCloseHandler}>
-                <CloseRoundedIcon fontSize='small' />
+            <Stack direction="row" alignItems="center" justifyContent="space-between" pb={2} mx={5}>
+              <Box component="span" onClick={props.onCloseHandler}>
+                <CloseRoundedIcon fontSize="small" />
               </Box>
               <Box mx={10}>
-                <Typography variant='font24Bold700'>Орц нэмэх </Typography>
+                <Typography variant="font24Bold700">Орц нэмэх </Typography>
               </Box>
-              <Button variant='contained' onClick={saveRecipeData}>
+              <Button variant="contained" onClick={saveRecipeData}>
                 Хадгалах
               </Button>
             </Stack>
             <Divider />
             {/*=========== Add recipes========== */}
-            <Stack direction='row' mb={10}>
+            <Stack direction="row" mb={10}>
               <Box className={styles.inputs} mx={10}>
                 {/* INPUT-1 */}
-                <Stack direction='column'>
-                  <Typography
-                    variant='font16Bold600'
-                    color='secondary.black'
-                    mt={5}
-                    mb={2}
-                  >
+                <Stack direction="column">
+                  <Typography variant="font16Bold600" color="secondary.black" mt={5} mb={2}>
                     Орцны нэр
                   </Typography>
-                  <TextField
-                    placeholder='Энд бичнэ үү'
-                    name='name'
-                    value={recipesData.name}
-                    onChange={inputHandler}
-                  />
+                  <TextField placeholder="Энд бичнэ үү" name="name" value={recipesData.name} onChange={inputHandler} />
                 </Stack>{' '}
                 {/* INPUT-2 */}
-                <Stack direction='row'>
+                <Stack direction="row">
                   <Stack>
-                    <Typography
-                      variant='font16Bold600'
-                      color='secondary.black'
-                      mt={5}
-                      mb={2}
-                    >
+                    <Typography variant="font16Bold600" color="secondary.black" mt={5} mb={2}>
                       Төрөл
                     </Typography>
                     <FormControl sx={{ minWidth: 200 }}>
-                      <InputLabel id='demo-simple-select-label'>
-                        Төрөл
-                      </InputLabel>
-                      <Select
-                        value={recipesData.amountType}
-                        name='amountType'
-                        onChange={inputHandler}
-                      >
+                      <InputLabel id="demo-simple-select-label">Төрөл</InputLabel>
+                      <Select value={recipesData.amountType} name="amountType" onChange={inputHandler}>
                         <MenuItem value={'грамм'}>грамм</MenuItem>
                         <MenuItem value={'ширхэг'}>ширхэг</MenuItem>
                       </Select>

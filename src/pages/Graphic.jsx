@@ -1,20 +1,7 @@
 import React from 'react';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import {
-  Box,
-  Button,
-  Typography,
-  Modal,
-  TextField,
-  Stack,
-  Divider,
-  InputAdornment,
-  IconButton,
-  OutlinedInput,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
+import { Stack } from '@mui/material';
 import orderData from '../data/order.json';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);

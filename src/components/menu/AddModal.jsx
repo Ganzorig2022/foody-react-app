@@ -34,8 +34,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { toast } from 'react-toastify';
 
 const AddModal = (props) => {
-  const { recipesData, setRecipesData, addedFood, setAddedFood, isSpinning, setIsSpinning, setIsDownloaded } =
-    useMenuContext();
+  const { recipesData, setRecipesData, addedFood, setAddedFood, setIsSpinning, setIsDownloaded } = useMenuContext();
   const [imageData, setImageData] = useState({
     url: '',
     file: '',
@@ -123,7 +122,7 @@ const AddModal = (props) => {
     try {
       const storage = getStorage(app);
       const storageRef = ref(storage, 'images/' + imageData.imageName);
-      const uploadTask = await uploadBytes(storageRef, imageData.file);
+      await uploadBytes(storageRef, imageData.file);
 
       const downloadURL = await getDownloadURL(storageRef);
       //add new key (URL) to addedFood object.
