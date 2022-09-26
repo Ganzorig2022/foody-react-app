@@ -12,7 +12,7 @@ import { getDataFromFirestore } from '../../hooks/useFirebase';
 const MenuList = () => {
   const { allMenu, setAllMenu, isDownloaded, setIsDownloaded } = useMenuContext();
   const [isLoading, setIsLoading] = useState(true);
-  // const params = useParams();
+  const params = useParams();
 
   useEffect(() => {
     const getMenuData = async () => {
