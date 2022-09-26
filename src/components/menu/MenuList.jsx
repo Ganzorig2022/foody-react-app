@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import _ from 'lodash';
 import { Box, Typography, InputBase, Stack } from '@mui/material';
 import styles from './menu.module.css';
@@ -7,11 +8,11 @@ import FoodAdd from './FoodAdd';
 import { useMenuContext } from '../../provider/Menu';
 import { LoadingSpinner } from '../../components/Spinner';
 import { getDataFromFirestore } from '../../hooks/useFirebase';
-import { useState } from 'react';
 
 const MenuList = () => {
   const { allMenu, setAllMenu, isDownloaded, setIsDownloaded } = useMenuContext();
   const [isLoading, setIsLoading] = useState(true);
+  const params = useParams();
 
   useEffect(() => {
     const getMenuData = async () => {
