@@ -45,7 +45,6 @@ const AddModal = (props) => {
   const theme = useTheme();
   const is600px = useMediaQuery(theme.breakpoints.down('sm'));
   const between600_900 = useMediaQuery(theme.breakpoints.between('sm', 'md'));
-  console.log(between600_900);
   //========Image file input handler===============
   const imgUploadHandler = (e) => {
     const file = e.target.files[0];
