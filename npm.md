@@ -99,8 +99,16 @@ function App() {
 
 =================================================================
 //===============GITHUB ACTIONS==============================
+=============push hiih bolgond deploy hiine.================
 New workflow
 Simple workflow search hiine.
 Configure dr darna. 
 Start commit dr darna.
 Commit new file dr darna.
+firebase init hosting
+build
+Aldaa zaawal "unused variable"-uudaa ustgaad dahiad....push
+github/workflows folder dotor .yml folder dotor       
+- run: 'npm install && npm run build' oruulj ogno.
+
+

@@ -3,7 +3,7 @@ import { getFirestore } from 'firebase/firestore';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyDRTChuPv4LM72IeuL-62oifekcPE8JPL8',
+  apiKey: process.env.REACT_APP_APIKEY,
   authDomain: 'foody-app-8c4bc.firebaseapp.com',
   projectId: 'foody-app-8c4bc',
   storageBucket: 'foody-app-8c4bc.appspot.com',

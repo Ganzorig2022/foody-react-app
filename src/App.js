@@ -27,8 +27,8 @@ function App() {
           <Route path="*" element={<h1 style={style}>404 PAGE NOT FOUND</h1>} />
           <Route path="/foody-react-app" element={<SignUp />} />
           <Route path="/graphic" element={<Graphic />} />
-          <ToastContainer />
         </Routes>
+        <ToastContainer />
       </Router>
     </>
   );
